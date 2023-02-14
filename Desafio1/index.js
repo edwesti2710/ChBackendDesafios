@@ -28,6 +28,7 @@ class ProductManager {
     }
 }
 
+// TESTING
 // const productsManager = new ProductManager();
 
 // console.log(productsManager.getProducts())
