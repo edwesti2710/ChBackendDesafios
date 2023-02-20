@@ -8,13 +8,21 @@ class ProductManager {
             return console.log('All fields are required!');
         } else {
             const products = this.getProducts();
-            if (products.some(product => product.code === newProduct.code)) {
+            const nuevoProducto = {
+                title: newProduct.title,
+                description: newProduct.description,
+                price: newProduct.price,
+                thumbnail: newProduct.thumbnail,
+                stock: newProduct.stock,
+                code: newProduct.code,
+                id: products.length + 1
+            }
+            if (products.some(product => product.code === nuevoProducto.code)) {
                 return console.log('This product already exists!')
             } else {
-                newProduct.id = products.length + 1;
-                this.products.push(newProduct);
+                this.products.push(nuevoProducto);
                 console.log('Product was successfully added')
-                return newProduct.id;
+                return nuevoProducto.id;
             }
         }
     }
