@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Mi Producto 1",
+    "description": "Descripción de Producto 1",
+    "price": 100,
+    "thumbail": "no",
+    "code": "asd1",
+    "stock": 11
+  },
+  {
+    "id": 2,
+    "title": "Mi Producto 2",
+    "description": "Descripción de Producto 2",
+    "price": 200,
+    "thumbail": "no",
+    "code": "asd2",
+    "stock": 22
+  },
+  {
+    "id": 3,
+    "title": "Mi Producto 3",
+    "description": "Descripción de Producto 3",
+    "price": 300,
+    "thumbail": "no",
+    "code": "asd3",
+    "stock": 33
+  },
+  {
+    "id": 4,
+    "title": "Mi Producto 4",
+    "description": "Descripción de Producto 4",
+    "price": 400,
+    "thumbail": "no",
+    "code": "asd4",
+    "stock": 44
+  },
+  {
+    "id": 5,
+    "title": "Mi Producto 5",
+    "description": "Descripción de Producto 5",
+    "price": 500,
+    "thumbail": "no",
+    "code": "asd5",
+    "stock": 55
+  },
+  {
+    "id": 6,
+    "title": "Mi Producto 6",
+    "description": "Descripción de Producto 6",
+    "price": 600,
+    "thumbail": "no",
+    "code": "asd6",
+    "stock": 66
+  },
+  {
+    "id": 7,
+    "title": "Mi Producto 7",
+    "description": "Descripción de Producto 7",
+    "price": 700,
+    "thumbail": "no",
+    "code": "asd7",
+    "stock": 77
+  },
+  {
+    "id": 8,
+    "title": "Mi Producto 8",
+    "description": "Descripción de Producto 8",
+    "price": 800,
+    "thumbail": "no",
+    "code": "asd8",
+    "stock": 88
+  },
+  {
+    "id": 9,
+    "title": "Mi Producto 9",
+    "description": "Descripción de Producto 9",
+    "price": 900,
+    "thumbail": "no",
+    "code": "asd9",
+    "stock": 99
+  },
+  {
+    "id": 10,
+    "title": "Mi Producto 10",
+    "description": "Descripción de Producto 10",
+    "price": 1000,
+    "thumbail": "no",
+    "code": "asd10",
+    "stock": 1010
+  }
+]

@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 
 class ProductManager {
     constructor(path) {
@@ -29,21 +29,21 @@ class ProductManager {
             }
         }
     }
-    getProducts() {
+    async getProducts() {
         if (!fs.existsSync(this.path)) {
             fs.writeFileSync(this.path, JSON.stringify([]));
         }
-        const products = fs.readFileSync(this.path);
+        const products = await fs.readFileSync(this.path);
         console.log(products);
         return JSON.parse(products);
     }
-    getProductById(id) {
-        const products = this.getProducts();
+    async getProductById(id) {
+        const products = await this.getProducts();
         let desiredProduct = products.find(product => product.id === id)
         return desiredProduct ? console.log(desiredProduct) : console.log('Not Found');
     }
-    updateProduct(id, newData) {
-        const products = this.getProducts();
+    async updateProduct(id, newData) {
+        const products = await this.getProducts();
         const productIndex = products.findIndex((product) => product.id === id);
         if (productIndex !== -1) {
             products[productIndex] = { ...newData, id };
@@ -53,12 +53,12 @@ class ProductManager {
         }
         throw 'Product to update was not found';
     }
-    deleteProduct(id) {
-        const products = this.getProducts();
+    async deleteProduct(id) {
+        const products = await this.getProducts();
         const productIndex = products.findIndex((product) => product.id === id);
         if (productIndex !== -1) {
             products.splice(productIndex, 1);
-            fs.writeFileSync(this.path, JSON.stringify(products));
+            await fs.writeFileSync(this.path, JSON.stringify(products));
             console.log('The product was disposed of correctly');
             return null;
         }
@@ -67,9 +67,9 @@ class ProductManager {
 }
 
 // TESTING
-// const productManager = new ProductManager('./products.json');
+const productManager = new ProductManager('./products.json');
 
-// console.log(productManager.getProducts())
+console.log(productManager.getProducts())
 
 // productManager.addProduct({
 //     title: 'producto prueba',
