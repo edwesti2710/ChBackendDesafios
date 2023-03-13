@@ -4,12 +4,11 @@ class ProductManager {
     constructor(path) {
         this.path = path;
     }
-    addProduct(newProduct) {
-
+    async addProduct(newProduct) {
         if (!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.thumbnail || !newProduct.code || !newProduct.stock) {
             return console.log('All fields are required!');
         } else {
-            const products = this.getProducts();
+            const products = await this.getProducts();
             const nuevoProducto = {
                 title: newProduct.title,
                 description: newProduct.description,
