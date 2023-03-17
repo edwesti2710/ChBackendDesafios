@@ -23,7 +23,7 @@ export class ProductManager {
                 title: product.title,
                 description: product.description,
                 price: product.price,
-                status: product.status || true,
+                status: product.status,
                 category: product.category,
                 thumbnail: product.thumbnail || [],
                 code: product.code,
@@ -32,6 +32,9 @@ export class ProductManager {
             if (allProducts.find(product => product.code === newProduct.code)) {
                 throw new Error('Product code already exists')
             } else {
+                if (typeof (newProduct.status) !== 'boolean') {
+                    newProduct.status = true;
+                }
                 newProduct.id = crypto.randomUUID();
                 allProducts.push(newProduct)
                 await fs.writeFile(this.path, JSON.stringify(allProducts, null, 2))
@@ -47,7 +50,7 @@ export class ProductManager {
         const allProducts = await this.getProducts();
         const productIndex = allProducts.findIndex(product => product.id === id);
         if (productIndex !== -1) {
-            allProducts[productIndex] = { ...allProducts[productIndex], ...newProps };
+            allProducts[productIndex] = { ...allProducts[productIndex], ...newProps, ...{ "id": id } };
             await fs.writeFile(this.path, JSON.stringify(allProducts, null, 2))
             console.log('Changes has been changed succesfully');
             return allProducts[productIndex];

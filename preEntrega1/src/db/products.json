@@ -10,7 +10,7 @@
     ],
     "code": "111",
     "stock": "101",
-    "id": 11
+    "id": "11"
   },
   {
     "title": "product12",
@@ -63,5 +63,70 @@
     "code": "555",
     "stock": "505",
     "id": "004e2a1c-8b68-41db-b7d7-b556b7ff5e02"
+  },
+  {
+    "title": "product66",
+    "description": "product66",
+    "price": 606,
+    "status": true,
+    "category": "type6",
+    "thumbnail": [
+      "img66"
+    ],
+    "code": "666",
+    "stock": "606",
+    "id": "f9051bd1-1c17-4e5d-a1ef-05487d876b01"
+  },
+  {
+    "title": "product77",
+    "description": "product77",
+    "price": 707,
+    "status": true,
+    "category": "type7",
+    "thumbnail": [
+      "img77"
+    ],
+    "code": "777",
+    "stock": "707",
+    "id": "a36ef3e9-401f-455a-9f26-fd2826dceef6"
+  },
+  {
+    "title": "product88",
+    "description": "product88",
+    "price": 808,
+    "status": true,
+    "category": "type8",
+    "thumbnail": [
+      "img88"
+    ],
+    "code": "888",
+    "stock": "808",
+    "id": "8a7a5e11-67d5-4016-a078-e466337ca5cd"
+  },
+  {
+    "title": "product99",
+    "description": "product99",
+    "price": 909,
+    "status": "aea",
+    "category": "type9",
+    "thumbnail": [
+      "img99"
+    ],
+    "code": "999",
+    "stock": "909",
+    "id": "ef2382d2-8ce2-4a90-9a45-583433326969"
+  },
+  {
+    "title": "product9999",
+    "description": "product9999",
+    "price": 99099,
+    "status": true,
+    "category": "type99",
+    "thumbnail": [
+      "img9999"
+    ],
+    "code": "999999",
+    "stock": "99099",
+    "id": "46a1b332-74cd-47d8-9b96-b7de9fd65bfe"
   }
 ]

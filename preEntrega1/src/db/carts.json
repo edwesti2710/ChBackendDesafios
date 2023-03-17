@@ -4,10 +4,14 @@
     "products": [
       {
         "product": "p111",
-        "quantity": 8
+        "quantity": 14
       },
       {
         "product": "p222",
+        "quantity": 1
+      },
+      {
+        "product": "p2223",
         "quantity": 1
       }
     ]
@@ -40,6 +44,10 @@
   },
   {
     "id": "c935616e-bbe8-4a9c-8607-5cc63154583b",
+    "products": []
+  },
+  {
+    "id": "efd942f4-fc3f-49bb-b161-a635efaababb",
     "products": []
   }
 ]
