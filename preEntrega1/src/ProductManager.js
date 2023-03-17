@@ -72,27 +72,3 @@ export class ProductManager {
         }
     }
 }
-
-// productManager.addProduct({title: 'edward3', description: 'edward3', price: 30, thumbnail: 'img3', code: '33', stock: '303'})
-// const productManager = new ProductManager('./static/db.txt')
-// console.log(await productManager.getProducts())
-// productManager.addProduct({
-//     title: 'producto prueba',
-//     description: 'Este es un producto prueba',
-//     price: 200,
-//     thumbnail: 'Sin imagen',
-//     code: 'abc123',
-//     stock: 50
-// });
-// productManager.addProduct({
-//     title: 'producto prueba 2',
-//     description: 'Este es un producto prueba 2',
-//     price: 200,
-//     thumbnail: 'Sin imagen',
-//     code: 'abc1234',
-//     stock: 50
-// });
-// productManager.deleteProduct(2)
-// console.log(productManager.getProducts());
-
-// productManager.getProductById(2);
