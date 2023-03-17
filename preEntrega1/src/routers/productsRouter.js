@@ -32,10 +32,10 @@ productsRouter.post('/', async (req, res) => {
 })
 
 productsRouter.get('/:pid', async (req, res) => {
-    const idOfProduct = Number(req.params.pid)
+    const idOfProduct = req.params.pid
     const product = await productManager.getProductByID(idOfProduct)
 
-    if (isNaN(idOfProduct) || !product) {
+    if (!idOfProduct || !product) {
         res.status(400).json({ error: error.message })
     } else {
         res.json(product)
