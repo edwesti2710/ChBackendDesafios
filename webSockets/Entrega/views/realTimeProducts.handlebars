@@ -1,0 +1,32 @@
+<h1>Productos - RealTime</h1>
+<form method="post" action="/realtimeproducts" class="formulario">
+    <label for="title">Título: <input type="text" id="title" name="title"></input></label>
+    <label for="description">Descripción: <input type="text" id="description" name="description"></input></label>
+    <label for="price">Precio: <input type="number" id="price" name="price" min="0"></input></label>
+    <label for="status">Estado:
+        <select name="status" id="status">
+            <option value="true">
+                Activado
+            </option>
+            <option value="false">
+                Desactivado
+            </option>
+        </select>
+    </label>
+    <label for="category">Categoria: <input type="text" id="category" name="category"></input></label>
+    <label for="code">Código: <input type="text" id="code" name="code"></input></label>
+    <label for="stock">Stock: <input type="number" id="stock" name="stock" min="0"></input></label>
+    <input type="button" id="btnEnviar" value="Enviar"></input>
+</form>
+{{#if hayProductos}}
+<ul>
+    {{#each products}}
+    <li>{{this.title}} {{this.description}}: {{this.price}}</li>
+    {{/each}}
+</ul>
+{{else}}
+<h3>No hay productos disponibles</h3>
+{{/if}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/index.js"></script>

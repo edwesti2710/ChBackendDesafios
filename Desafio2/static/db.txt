@@ -1,0 +1,20 @@
+[
+  {
+    "title": "edward",
+    "description": "edward1",
+    "price": 10,
+    "thumbnail": "img1",
+    "code": "11",
+    "stock": "101",
+    "id": 1
+  },
+  {
+    "title": "edward23",
+    "description": "edward2",
+    "price": 20,
+    "thumbnail": "img2",
+    "code": "22",
+    "stock": "202",
+    "id": 2
+  }
+]

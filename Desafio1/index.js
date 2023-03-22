@@ -2,54 +2,38 @@ class ProductManager {
     constructor() {
         this.products = [];
     }
-    addProduct(newProduct) {
-
-        if (!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.thumbnail || !newProduct.code || !newProduct.stock) {
-            return console.log('All fields are required!');
+    addProduct(product) {
+        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
+            throw new Error('Todos los campos son requeridos')
         } else {
-            const products = this.getProducts();
-            const nuevoProducto = {
-                title: newProduct.title,
-                description: newProduct.description,
-                price: newProduct.price,
-                thumbnail: newProduct.thumbnail,
-                stock: newProduct.stock,
-                code: newProduct.code,
-                id: products.length + 1
+            const allProducts = this.getProducts();
+            const newProduct = {
+                title: product.title,
+                description: product.description,
+                price: product.price,
+                thumbnail: product.thumbnail,
+                code: product.code,
+                stock: product.stock
             }
-            if (products.some(product => product.code === nuevoProducto.code)) {
-                return console.log('This product already exists!')
+            if (allProducts.find(product => product.code === newProduct.code)) {
+                throw new Error('El producto ya existe')
             } else {
-                this.products.push(nuevoProducto);
-                console.log('Product was successfully added')
-                return nuevoProducto.id;
+                newProduct.id = allProducts.length + 1;
+                this.products.push(newProduct);
             }
         }
     }
     getProducts() {
         return this.products;
     }
-    getProductById(id) {
-        const products = this.getProducts();
-        let desiredProduct = products.find(product => product.id === id)
-        return desiredProduct ? console.log(desiredProduct) : console.log('Not Found');
+    getProductById(id){
+        const allProducts = this.getProducts();
+        return allProducts.find(product => product.id === id) || 'NO existe el producto'
     }
 }
 
-// TESTING
-// const productsManager = new ProductManager();
-
-// console.log(productsManager.getProducts())
-
-// productsManager.addProduct({
-//     title: 'producto prueba',
-//     description: 'Este es un producto prueba',
-//     price: 200,
-//     thumbnail: 'Sin imagen',
-//     code: 'abc123',
-//     stock: 25
-// });
-
-// console.log(productsManager.getProducts());
-
-// productsManager.getProductById(2);
+const productManager = new ProductManager();
+productManager.addProduct({ title: 'producto1', description: 'description1', price: 11, thumbnail: 'img1', code: '111', stock: 11 });
+productManager.addProduct({ title: 'producto2', description: 'description2', price: 22, thumbnail: 'img2', code: '222', stock: 22 });
+console.log(productManager.getProducts());
+console.log(productManager.getProductById(2))

@@ -1,97 +1,88 @@
 import fs from 'fs/promises'
-
-class ProductManager {
+export class ProductManager {
     constructor(path) {
-        //instancio el id en cero para luego incrementarlo por cada producto creado.
-        this.id = 0;
         this.path = path
-        this.products = [];
     }
-
-    async loadProducts(){
-        const json = await fs.readFile(this.path, 'utf-8');
-        //Si el archivo esta vacio le inserto un array vacio.
-        if (!json) {
-            await this.saveProducts();
+    async getProducts() {
+        try {
+            const db = await fs.readFile(this.path)
+            return await JSON.parse(db)
+        } catch (error) {
+            console.error(`Error reading file ${this.path}: ${error}`)
+            throw error
+        }
+    }
+    async addProduct(product) {
+        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock) {
+            throw new Error('All fields are required')
         } else {
-            const products = JSON.parse(json);
-            if (products.length > 0){
-                this.products = products;
-                this.id = this.products[this.products.length - 1].id; //Tomo el ultimo id utilizado en el archivo y lo guardo.
+            const allProducts = await this.getProducts();
+            const newProduct = {
+                title: product.title,
+                description: product.description,
+                price: product.price,
+                thumbnail: product.thumbnail,
+                code: product.code,
+                stock: product.stock
             }
-        }    
-    }
-
-    //Guardo el producto en el archivo
-    async saveProducts(){
-        const json = JSON.stringify(this.products, null, 2)
-        await fs.writeFile(this.path, json)
-    }
-
-    async addProduct(title, description, price, thumbail, code, stock){
-        //Cargo los datos del archivo
-        await this.loadProducts();
-        //valido que no se repita el campo code y que todos los campos sean obligatorios
-        if (title && description && price && thumbail && code && stock){
-            const existCode = this.products.some(product => product.code === code) // valido que el producto no exista
-            if (existCode){
-                throw new Error("Code ya existe");
+            if (allProducts.find(product => product.code === newProduct.code)) {
+                throw new Error('Product code already exists')
             } else {
-                //agrego al array vacio el nuevo producto con sus propiedades y id autogenerado.
-                this.products.push({ id: ++this.id, title, description, price, thumbail, code, stock});
-                await this.saveProducts(); //espero hasta que se guarde el producto
+                newProduct.id = allProducts.length + 1;
+                allProducts.push(newProduct)
+                await fs.writeFile(this.path, JSON.stringify(allProducts, null, 2))
             }
-        } else {
-            throw new Error("Faltan campos");
-        }  
-    }
-
-    async getProducts(){
-        await this.loadProducts();
-        console.log(this.products)
-    }
-
-    async getProductById(id){
-        await this.loadProducts();
-        const indexID = this.products.find(product => product.id == id);
-        if (indexID){
-            console.log("El producto con el id es: ", indexID);
-        } else {
-            throw new Error("Not Found")
         }
     }
-
-    async updateProduct(id, data){
-        await this.loadProducts();
-        const indexID = this.products.findIndex(product => product.id === id);
-        if (indexID !== -1){
-            this.products[indexID] = {
-                ...this.products[indexID], //Mantengo las propiedades del producto anterior
-                ...data //sobreescribo los datos con los nuevos datos.
-            }
-            await this.saveProducts();
+    async getProductByID(id) {
+        const allProducts = await this.getProducts();
+        return allProducts.find(product => product.id === id) || null;
+    }
+    async updateProduct(id, newProps) {
+        const allProducts = await this.getProducts();
+        const productIndex = allProducts.findIndex(product => product.id === id);
+        if (productIndex !== -1) {
+            allProducts[productIndex] = { ...allProducts[productIndex], ...newProps };
+            await fs.writeFile(this.path, JSON.stringify(allProducts, null, 2))
+            console.log('Changes has been changed succesfully');
+            return allProducts[productIndex];
         } else {
-            throw new Error("Not Found")
+            throw new Error('This product does not exist'); 
         }
     }
-
-    async deleteProduct(id){
-        await this.loadProducts();
-        const existID = this.products.findIndex(product => product.id === id);
-        if (existID !== -1){
-            this.products.splice(existID, 1)
-            await this.saveProducts()
+    async deleteProduct(id) {
+        const allProducts = await this.getProducts();
+        const productIndex = allProducts.findIndex(product => product.id === id);
+        if (productIndex !== -1) {
+            allProducts.splice(productIndex, 1);
+            await fs.writeFile(this.path, JSON.stringify(allProducts, null, 2))
+            console.log('This product has been deleted');
         } else {
-            throw new Error("Not Found")
+            throw new Error('This product does not exist');
         }
     }
-} 
+}
 
+// productManager.addProduct({title: 'edward3', description: 'edward3', price: 30, thumbnail: 'img3', code: '33', stock: '303'})
+// const productManager = new ProductManager('./static/db.txt')
+// console.log(await productManager.getProducts())
+// productManager.addProduct({
+//     title: 'producto prueba',
+//     description: 'Este es un producto prueba',
+//     price: 200,
+//     thumbnail: 'Sin imagen',
+//     code: 'abc123',
+//     stock: 50
+// });
+// productManager.addProduct({
+//     title: 'producto prueba 2',
+//     description: 'Este es un producto prueba 2',
+//     price: 200,
+//     thumbnail: 'Sin imagen',
+//     code: 'abc1234',
+//     stock: 50
+// });
+// productManager.deleteProduct(2)
+// console.log(productManager.getProducts());
 
-
-//PRUEBAS
-const products = new ProductManager("./products.txt");
-
-
-export default ProductManager;
-
+// productManager.getProductById(2);

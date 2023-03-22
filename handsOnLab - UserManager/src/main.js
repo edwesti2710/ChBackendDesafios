@@ -1,18 +1,19 @@
-import { UserManager } from './UserManajer.js';
-import { User } from './User.js';
+import { encriptar } from './encriptar.js';
+import { UserManager } from './UserManager.js';
+import colors from 'colors';
 
-const um = new UserManager('./database/usuarios.json');
-const user = await um.crearUsuario({
-    nombre: 'marian',
-    apellido: 'aquino',
-    username: 'marian',
-    password: '123456'
-})
+const um = new UserManager('./database/usuarios.json')
+// const user = await um.createUser({
+//     name: 'edward',
+//     lastName: 'espinoza',
+//     userName: 'edward1',
+//     password: 'mipass'
+// })
 
 // console.log(user);
-// um.loguear
-const loggear = await um.loguear({
-    username: 'marian',
-    password: '123456'
+// console.log(await encriptar('mipass'));
+const loggedUser = await um.validateUser({
+    userName: 'edward1',
+    password:'mipass'
 })
-console.log(loggear);
+// console.log(colors.magenta('fin'))
